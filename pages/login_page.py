@@ -5,6 +5,7 @@ from locators.progress_action_locators import ProgressActionLocators
 
 class LoginPage(Page):
     def enter_login(self, login):
+        self.find_element(LoginPageLocators.LOGIN).click()
         self.find_element(LoginPageLocators.LOGIN).send_keys(login)
 
     def enter_password(self, password):
@@ -14,7 +15,7 @@ class LoginPage(Page):
         self.find_element(LoginPageLocators.TERMINAL).send_keys(terminal)
 
     def click_login_button(self):
-        self.find_element(LoginPageLocators.LOGIN_BUTTON).click()
+        self.click_element(LoginPageLocators.LOGIN_BUTTON)
         self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
 
     def get_text_login_button(self):

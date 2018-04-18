@@ -8,5 +8,5 @@ class AddProductionPage(Page):
         self.find_element(AddProductionPageLocators.ADD_PRODUCTION_INPUT).send_keys(production)
 
     def click_add_production_button(self):
-        self.find_element_force_click(AddProductionPageLocators.ADD_PRODUCTION_BUTTON)
+        self.click_element(AddProductionPageLocators.ADD_PRODUCTION_BUTTON)
         self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)

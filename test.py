@@ -18,9 +18,10 @@ class Test(TestBase, unittest.TestCase):
         try:
             driver = self.driver
             loginPage = LoginPage(driver)
+            loginPage.enter_terminal("qmes")
             loginPage.enter_login("oper")
             loginPage.enter_password("oper")
-            loginPage.enter_terminal("qmes")
+
             loginPage.click_login_button()
 
             mainPage = MainPage(driver)

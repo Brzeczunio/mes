@@ -16,6 +16,10 @@ class Page(object):
     def find_element(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
 
+    def click_element(self, locator):
+        element = self.wait.until(EC.element_to_be_clickable(locator))
+        element.click()
+
     def open(self, url):
         url = self.base_url + url
         self.driver.get(url)
