@@ -1,29 +1,10 @@
-from selenium import webdriver
-from base.base import Page
-from locators.main_page_locators import MainPageLocatars
-from locators.progress_action_locators import ProgressActionLocators
-from locators.screen_blockers_locators import ScreenBlokersLocators
+from lib.page import Page
+from selenium.webdriver.common.by import By
 
 class MainPage(Page):
-    def click_menu_button(self):
-        self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
-        self.click_element(MainPageLocatars.MENU_BUTTON)
-
-    def get_operator_info(self):
-        return self.find_element(MainPageLocatars.OPERATOR_INFO).text
-
-    def click_logout_button(self):
-        self.click_element(MainPageLocatars.LOGOUT_BUTTON)
-
-    def click_action_button(self):
-        self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
-        self.click_element(MainPageLocatars.ACTION_BUTTON)
-
-    def click_action_add_production_button(self):
-        self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
-        self.click_element(MainPageLocatars.ADD_PRODUCTION_BUTTON)
-        self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
-        self.invisibility_element(MainPageLocatars.ADD_PRODUCTION_BUTTON)
-
-    def get_success_message(self):
-        return self.find_element(MainPageLocatars.SUCCESS_MESSAGE).text
+    Page.BUTTON.MENU                      = (By.XPATH, "//button[@class='menu-button-fab mat-mini-fab mat-accent' or @class='mat-mini-fab mat-primary']")
+    Page.INFO.OPERATOR                    = (By.XPATH, "//div[@class='info']/h2")
+    Page.MESSAGE.SUCCESS                  = (By.XPATH, "//span[@class='ui-growl-title']")
+    Page.BUTTON.LOGOUT                    = (By.XPATH, "//div[@class='glyphs ic_mw_logout']")
+    Page.BUTTON.ACTION                    = (By.XPATH, "//button[@class='mes-color mat-fab mat-accent']")
+    Page.BUTTON.ADD_PRODUCTION            = (By.XPATH, "//button[@class='mes-color mat-mini-fab mat-accent fab-action-item ng-star-inserted']/span/mat-icon[@class='mat-icon mes-icon material-icons ic_mw_cartadd']")

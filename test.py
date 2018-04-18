@@ -5,28 +5,28 @@ import os
 import unittest
 from datetime import datetime
 from selenium import webdriver
-from base.base import TestBase
+from lib.test import Test
 from loggers.logger import Logger
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.add_production_page import AddProductionPage
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 from selenium.common.exceptions import *
 
-class Test(TestBase, unittest.TestCase):
+class Test(Test, unittest.TestCase):
     def test_1_Login(self):
         try:
             driver = self.driver
             loginPage = LoginPage(driver)
-            loginPage.enter_terminal("qmes")
-            loginPage.enter_login("oper")
-            loginPage.enter_password("oper")
-
-            loginPage.click_login_button()
-
+            loginPage.set_text_element(loginPage.INPUT.TERMINAL, "qmes")
+            loginPage.click_element(loginPage.INPUT.LOGIN)
+            loginPage.set_text_element(loginPage.INPUT.LOGIN, "oper")
+            loginPage.set_text_element(loginPage.INPUT.PASSWORD, "oper")
+            loginPage.click_element(loginPage.BUTTON.LOGIN)
             mainPage = MainPage(driver)
-            mainPage.click_menu_button()
-            self.assertEqual(u'oper oper', mainPage.get_operator_info())
+            mainPage.click_element(mainPage.BUTTON.MENU)
+            self.assertEqual(u'oper oper', mainPage.get_text_element(mainPage.INFO.OPERATOR))
 
         except (Exception, WebDriverException, TimeoutException) as e:
             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -38,12 +38,12 @@ class Test(TestBase, unittest.TestCase):
             driver = self.driver
             loginPage = LoginPage(driver)
             mainPage = MainPage(driver)
-            mainPage.click_action_button()
-            mainPage.click_action_add_production_button()
+            mainPage.click_element(loginPage.BUTTON.ACTION)
+            mainPage.click_element(loginPage.BUTTON.ADD_PRODUCTION)
             addProductionPage = AddProductionPage(driver)
-            addProductionPage.enter_production("2")
-            addProductionPage.click_add_production_button()
-            self.assertEqual(u'Udało się!', mainPage.get_success_message())
+            addProductionPage.set_text_element(addProductionPage.INPUT.ADD_PRODUCTION, "2")
+            addProductionPage.set_text_element(addProductionPage.BUTTON.ADD_PRODUCTION, "2")
+            self.assertEqual(u'Udało się!', mainPage.get_text_element(mainPage.MESSAGE.SUCCESS))
         except (Exception, WebDriverException, TimeoutException) as e:
             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             self.logger.take_screenshot(driver, 'error-%s' % now)
@@ -54,9 +54,9 @@ class Test(TestBase, unittest.TestCase):
             driver = self.driver
             loginPage = LoginPage(driver)
             mainPage = MainPage(driver)
-            mainPage.click_menu_button()
-            mainPage.click_logout_button()
-            self.assertEqual(u'Zaloguj', loginPage.get_text_login_button())
+            mainPage.click_element(mainPage.BUTTON.MENU)
+            mainPage.click_element(mainPage.BUTTON.LOGOUT)
+            self.assertEqual(u'Zaloguj', loginPage.get_text_element(mainPage.BUTTON.LOGIN))
         except (Exception, WebDriverException, TimeoutException) as e:
             now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
             self.logger.take_screenshot(driver, 'error-%s' % now)

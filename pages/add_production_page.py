@@ -1,12 +1,6 @@
-from selenium import webdriver
-from base.base import Page
-from locators.add_production_page_locators import AddProductionPageLocators
-from locators.progress_action_locators import ProgressActionLocators
+from lib.page import Page
+from selenium.webdriver.common.by import By
 
 class AddProductionPage(Page):
-    def enter_production(self, production):
-        self.find_element(AddProductionPageLocators.ADD_PRODUCTION_INPUT).send_keys(production)
-
-    def click_add_production_button(self):
-        self.click_element(AddProductionPageLocators.ADD_PRODUCTION_BUTTON)
-        self.invisibility_element(ProgressActionLocators.PROGRESS_SPINNER)
+    Page.INPUT.ADD_PRODUCTION             = (By.XPATH, "//input[@formcontrolname='quantity']")
+    Page.BUTTON.ADD_PRODUCTION            = (By.XPATH, "//button[@class='image-button mat-raised-button' and @type='submit']/span/div/mat-icon[@class='mat-icon mes-icon material-icons ic_mw_addbutton']")
