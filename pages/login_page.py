@@ -2,9 +2,9 @@ from lib.page import Page
 from selenium.webdriver.common.by import By
 
 class LoginPage(Page):
-    pass
-
-LoginPage.INPUT.LOGIN = (By.NAME, "login")
-LoginPage.INPUT.PASSWORD = (By.NAME, "password")
-LoginPage.INPUT.TERMINAL = (By.NAME, "terminal")
-LoginPage.BUTTON.LOGIN = (By.XPATH, "//button[@class='btn-login mat-primary mat-raised-button']")
+    def __init__(self, driver):
+        super(LoginPage, self).__init__(driver)
+        self.INPUT.LOGIN = (By.NAME, "login")
+        self.INPUT.PASSWORD = (By.NAME, "password")
+        self.INPUT.TERMINAL = (By.NAME, "terminal")
+        self.BUTTON.LOGIN = (By.XPATH, "//button[@class='btn-login mat-primary mat-raised-button']")
